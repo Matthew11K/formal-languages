@@ -1,1 +1,4 @@
-trs_lab/tagret
+**/target/
+
+.DS_Store
+**/.DS_Store
