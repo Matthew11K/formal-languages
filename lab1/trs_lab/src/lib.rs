@@ -291,3 +291,40 @@ pub fn fuzz_sig_once(
     let s0 = signature(&chain[0]);
     chain[1..].iter().all(|w| signature(w) == s0)
 }
+
+pub fn cd_block_lengths(w: &str) -> Vec<usize> {
+    let mut lens = Vec::<usize>::new();
+    let mut cur = 0usize;
+    for ch in w.bytes() {
+        match ch {
+            b'b' => {
+                lens.push(cur);
+                cur = 0;
+            }
+            b'c' | b'd' => cur += 1,
+            _ => {}
+        }
+    }
+    lens.push(cur);
+    lens
+}
+
+pub fn residual_profile_mod(w: &str, m: usize) -> Vec<usize> {
+    let lens = cd_block_lengths(w);
+    lens.into_iter().map(|k| k % m).collect()
+}
+
+pub fn fuzz_profile_once(
+    rules: &Rules,
+    rng: &mut StdRng,
+    min_len: usize,
+    max_len: usize,
+    min_steps: usize,
+    max_steps: usize,
+    m: usize,
+) -> bool {
+    let w0 = random_word(min_len, max_len, rng);
+    let chain = random_chain_t(&w0, rules, min_steps, max_steps, rng);
+    let r0 = residual_profile_mod(&chain[0], m);
+    chain[1..].iter().all(|w| residual_profile_mod(w, m) == r0)
+}
