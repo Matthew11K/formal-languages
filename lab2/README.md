@@ -1,0 +1,51 @@
+# Лабораторная работа №1
+
+R=((bba∣a)b∣abab*(bab)*)*.
+
+## ДКА
+
+```dot
+digraph DFA {
+    rankdir=LR;
+    "" [shape=none,label=""];
+    "" -> q0;
+    node [shape=doublecircle]; q0 q1 q2 q3 q4 q5 q6;
+    node [shape=circle]; q7 q8 q9 q10 q11 q12 q13;
+    q_dead [shape=circle,label="T"];
+    
+    q0 -> q9 [label="a"];
+    q0 -> q11 [label="b"];
+    q1 -> q9 [label="a"];
+    q1 -> q13 [label="b"];
+    q2 -> q4 [label="a"];
+    q2 -> q11 [label="b"];
+    q3 -> q4 [label="a"];
+    q3 -> q13 [label="b"];
+    q4 -> q9 [label="a"];
+    q4 -> q6 [label="b"];
+    q5 -> q10 [label="a"];
+    q5 -> q5 [label="b"];
+    q6 -> q4 [label="a"];
+    q6 -> q5 [label="b"];
+    q7 -> q_dead [label="a"];
+    q7 -> q1 [label="b"];
+    q8 -> q_dead [label="a"];
+    q8 -> q0 [label="b"];
+    q9 -> q_dead [label="a"];
+    q9 -> q2 [label="b"];
+    q10 -> q_dead [label="a"];
+    q10 -> q3 [label="b"];
+    q11 -> q_dead [label="a"];
+    q11 -> q12 [label="b"];
+    q12 -> q8 [label="a"];
+    q12 -> q_dead [label="b"];
+    q13 -> q7 [label="a"];
+    q13 -> q12 [label="b"];
+    q_dead -> q_dead [label="a,b"];
+}
+
+```
+
+Алфавит: {a, b}
+Начальное состояние: q_0
+Конечные состояния: q_0-6
