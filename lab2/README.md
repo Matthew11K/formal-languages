@@ -7,11 +7,13 @@ R=((bba∣a)b∣abab*(bab)*)*.
 ```dot
 digraph DFA {
     rankdir=LR;
-    "" [shape=none,label=""];
-    "" -> q0;
+
     node [shape=doublecircle]; q0 q1 q2 q3 q4 q5 q6;
     node [shape=circle]; q7 q8 q9 q10 q11 q12 q13;
     q_dead [shape=circle,label="q14"];
+
+    "" [shape=none,label=""];
+    "" -> q0;
     
     q0 -> q9 [label="a"];
     q0 -> q11 [label="b"];
@@ -150,6 +152,11 @@ digraph PKA {
 
     start -> amp;
 
+    q0 [shape=doublecircle];
+    r0 [shape=doublecircle];
+    r1 [shape=doublecircle];
+    r2 [shape=doublecircle];
+
 
     q0 [label="q0"];
     q1 [label="q1"];
@@ -206,12 +213,6 @@ digraph PKA {
 
     r3 -> r3 [label="a"];
     r3 -> r3 [label="b"];
-
-    node [shape=doublecircle];
-    q0;
-    r0;
-    r1;
-    r2;
 }
 
 ```
