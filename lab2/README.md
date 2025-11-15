@@ -70,3 +70,49 @@ digraph DFA {
 | (q14) aa (ловушка) | − | − | −  | −     | − | −  | −   | −    |
 
 Все строки попарно различаются -> все состояния находятся в разных классах эквивалетности -> ДКА минимален.
+
+## НКА
+```dot
+digraph NFA {
+    rankdir=LR;
+    node [shape=circle];
+
+    start [shape=point];
+    start -> q0;
+
+    q0 [shape=doublecircle];
+    q6 [shape=doublecircle];
+    q9 [shape=doublecircle];
+
+    q0 -> q1 [label="a"];
+    q0 -> q4 [label="a"];
+    q0 -> q2 [label="b"];
+
+    q1 -> q0 [label="b"];
+
+    q2 -> q3 [label="b"];
+
+    q3 -> q1 [label="a"];
+
+    q4 -> q5 [label="b"];
+
+    q5 -> q6 [label="a"];
+
+    q6 -> q6 [label="b"];
+    q6 -> q7 [label="b"];
+
+    q7 -> q8 [label="a"];
+
+    q8 -> q9 [label="b"];
+
+    q9 -> q7 [label="b"];
+
+    q6 -> q0 [label="ε"];
+    q9 -> q0 [label="ε"];
+}
+
+```
+
+Алфавит: {a, b}
+Начальное состояние: q_0
+Конечные состояния: q_0,6,9
