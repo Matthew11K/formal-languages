@@ -131,3 +131,87 @@ digraph NFA {
 | ababb  | − | − | +  | +     | − | −  | −   | −    |
 | ababa  | − | − | −  | −     | + | −  | +   | +    |
 | ababab | + | − | +  | −     | − | −  | +   | +    |
+
+## ПКА
+Представим ПКА как персечение двух двух регулярных языков:
+1. L_1 - язык, порожденный исходным НКА
+2. L_2 - язык слов над ({a,b}), в которых **нет подслова `aaa`**.
+
+
+```dot
+digraph PKA {
+    rankdir=LR;
+
+    node [shape=circle];
+
+    start [shape=point];
+    
+    amp [label="&"];
+
+    start -> amp;
+
+
+    q0 [label="q0"];
+    q1 [label="q1"];
+    q2 [label="q2"];
+    q3 [label="q3"];
+    q4 [label="q4"];
+    q5 [label="q5"];
+    q6 [label="q6"];
+    q7 [label="q7"];
+    q8 [label="q8"];
+    q9 [label="q9"];
+    q10 [label="q10"];
+
+    amp -> q0 [label="ε"];
+
+    q0 -> q1 [label="a"];
+    q0 -> q5 [label="a"];
+    q0 -> q2 [label="b"];
+
+    q1 -> q0 [label="b"];
+
+    q2 -> q3 [label="b"];
+    q3 -> q4 [label="a"];
+    q4 -> q0 [label="b"];
+
+    q5 -> q6 [label="b"];
+    q6 -> q7 [label="a"];
+
+    q7 -> q7 [label="b"];
+    q7 -> q8 [label="b"];
+    q8 -> q9 [label="a"];
+    q9 -> q10 [label="b"];
+    q10 -> q8 [label="b"];
+
+    q7 -> q0 [label="ε"];
+    q10 -> q0 [label="ε"];
+
+
+    r0 [label="r0"];
+    r1 [label="r1"];
+    r2 [label="r2"];
+    r3 [label="r3"];
+
+    amp -> r0 [label="ε"];
+
+    r0 -> r1 [label="a"];
+    r0 -> r0 [label="b"];
+
+    r1 -> r2 [label="a"];
+    r1 -> r0 [label="b"];
+
+    r2 -> r3 [label="a"];
+    r2 -> r0 [label="b"];
+
+    r3 -> r3 [label="a"];
+    r3 -> r3 [label="b"];
+
+    node [shape=doublecircle];
+    q0;
+    r0;
+    r1;
+    r2;
+}
+
+```
